@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="24dp"
+    android:background="?attr/android:colorBackground"
+    tools:context=".ui.registro.RegistroActivity">
+
+    <!-- Título: "Registro" -->
+    <TextView
+        android:id="@+id/tvRegistroTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Registro"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        android:textColor="?attr/colorOnBackground"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="32dp"/>
+
+    <!-- 1. Nombre Completo -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilNombreCompleto"
+        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Ingrese su nombre completo"
+        app:layout_constraintTop_toBottomOf="@id/tvRegistroTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="32dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etNombreCompleto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName|textCapWords"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- 2. Usuario -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilUsuario"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Ingrese un usuario"
+        app:helperText="Ejemplo: UsuarioEjemplo123"
+        app:layout_constraintTop_toBottomOf="@id/tilNombreCompleto"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etUsuario"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- 3. Correo Electrónico -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilEmailRegistro"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Ingrese su correo electrónico"
+        app:layout_constraintTop_toBottomOf="@id/tilUsuario"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etEmailRegistro"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- 4. Confirmar Correo -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilEmailConfirm"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Confirme su correo electrónico"
+        app:layout_constraintTop_toBottomOf="@id/tilEmailRegistro"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etEmailConfirm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- 5. Contraseña -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilPasswordRegistro"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Ingrese una contraseña"
+        app:helperText="Min. 8 caract. alfanuméricos y 1 signo"
+        app:passwordToggleEnabled="true"
+        app:layout_constraintTop_toBottomOf="@id/tilEmailConfirm"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etPasswordRegistro"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- 6. Teléfono -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilTelefono"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Ingrese su teléfono"
+        app:prefixText="+54"
+        app:layout_constraintTop_toBottomOf="@id/tilPasswordRegistro"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etTelefono"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="phone"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <!-- Botones en un LinearLayout horizontal -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="32dp">
+
+        <!-- Botón: Cancelar -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnCancelar"
+            style="@style/Widget.Material3.Button.OutlinedButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Cancelar"
+            android:textColor="?attr/colorError"
+            app:strokeColor="?attr/colorError"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:textSize="16sp"
+            app:cornerRadius="8dp"
+            android:layout_marginEnd="8dp"/>
+
+        <!-- Botón: Continuar -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnContinuar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Continuar"
+            android:backgroundTint="?attr/colorPrimary"
+            android:textColor="?attr/colorOnPrimary"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:textSize="16sp"
+            app:cornerRadius="8dp"
+            android:layout_marginStart="8dp"/>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

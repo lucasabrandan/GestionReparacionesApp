@@ -1,33 +1,27 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- TEMA BASE MODO DARK (NOCHE) Hereda de Material 3, DayNight, y Sin Barra de Acción (NoActionBar).
-    -->
+    <!-- TEMA BASE MODO DARK (NOCHE) -->
     <style name="Base.Theme.GestionReparacionesApp" parent="Theme.Material3.DayNight.NoActionBar">
 
-        <!-- === COLORES SEMÁNTICOS (MODO DARK) === -->
-        <!--
-          Estos son valores de RELLENO (placeholders) que respetan el contraste.
-          Cuando tengas tu Figma Dark, vienes aquí y cambias estos valores.
-        -->
+        <!-- === TEMA DARK - (Basado en Logo) === -->
+        <!-- Paleta generada profesionalmente para M3 a partir de tus HEX -->
 
-        <!-- Color Primario (un azul más claro y menos saturado) -->
-        <item name="colorPrimary">#FF6EA8FF</item>
-        <item name="colorOnPrimary">#FF002E6E</item> <!-- Texto oscuro sobre primario claro -->
+        <!-- Primario (Amarillo más claro y suave) -->
+        <item name="colorPrimary">#FAD76E</item>
+        <item name="colorOnPrimary">#4F3900</item> <!-- Texto oscuro (derivado de amarillo) -->
 
-        <!-- Color Secundario (un gris claro) -->
-        <item name="colorSecondary">#FFC8C8C8</item>
+        <!-- Secundario (Gris claro, derivado del negro de tu marca) -->
+        <item name="colorSecondary">#E0E0E0</item>
         <item name="colorOnSecondary">@color/black</item>
 
-        <!-- Color de Error (un rojo más claro) -->
-        <item name="colorError">#FFEA9999</item>
-        <item name="colorOnError">@color/black</item>
+        <!-- Error (Rojo más claro y suave) -->
+        <item name="colorError">#F1A097</item>
+        <item name="colorOnError">#3E0000</item> <!-- Texto oscuro (derivado de rojo) -->
 
-        <!-- Color de Superficie (un gris oscuro para tarjetas) -->
+        <!-- Fondos (Estándar Dark) -->
         <item name="colorSurface">#FF1C1C1C</item>
-        <item name="colorOnSurface">@color/white</item> <!-- Texto blanco -->
-
-        <!-- Color de Fondo de la App (casi negro) -->
+        <item name="colorOnSurface">@color/white</item>
         <item name="android:colorBackground">#FF121212</item>
-        <item name="colorOnBackground">@color/white</item> <!-- Texto blanco -->
+        <item name="colorOnBackground">@color/white</item>
 
     </style>
 

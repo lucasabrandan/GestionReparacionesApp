@@ -9,28 +9,28 @@
     android:background="?attr/android:colorBackground"
     tools:context=".ui.login.LoginActivity">
 
-    <!-- Título: "Login" -->
-    <TextView
-        android:id="@+id/tvLoginTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Login"
-        android:textSize="32sp"
-        android:textStyle="bold"
-        android:textColor="?attr/colorOnBackground"
+    <!-- === AÑADIMOS EL LOGO === -->
+    <!-- Reemplaza el título de texto "Login" -->
+    <ImageView
+        android:id="@+id/ivAppLogo"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:src="@drawable/app_logo"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="64dp"/>
+        android:layout_marginTop="64dp"
+        android:contentDescription="@string/app_name" />
 
     <!-- Campo de Texto: Email (Usando Material 3) -->
+    <!-- La constraint superior ahora apunta al logo -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilEmail"
         style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="Email"
-        app:layout_constraintTop_toBottomOf="@id/tvLoginTitle"
+        app:layout_constraintTop_toBottomOf="@id/ivAppLogo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="48dp">
@@ -42,7 +42,7 @@
             android:inputType="textEmailAddress"/>
     </com.google.android.material.textfield.TextInputLayout>
 
-    <!-- Campo de Texto: Contraseña (Usando Material 3) -->
+    <!-- Campo de Texto: Contraseña (Sin cambios) -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilPassword"
         style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
@@ -62,7 +62,7 @@
             android:inputType="textPassword"/>
     </com.google.android.material.textfield.TextInputLayout>
 
-    <!-- Switch: Recordarme (Usando Material 3) -->
+    <!-- Switch: Recordarme (Sin cambios) -->
     <com.google.android.material.switchmaterial.SwitchMaterial
         android:id="@+id/swRecordarme"
         android:layout_width="wrap_content"
@@ -73,10 +73,7 @@
         app:layout_constraintTop_toBottomOf="@id/tilPassword"
         app:layout_constraintStart_toStartOf="parent"/>
 
-    <!-- Texto: Recuperar Contraseña -->
-    <!-- Decidimos usar un color fijo aquí (app_grey_text) porque es un color
-         de énfasis específico que probablemente sea gris en ambos temas.
-         Si quisiéramos que cambie, usaríamos ?attr/colorOnSurfaceVariant -->
+    <!-- Texto: Recuperar Contraseña (Sin cambios) -->
     <TextView
         android:id="@+id/tvRecuperar"
         android:layout_width="wrap_content"
@@ -87,7 +84,8 @@
         app:layout_constraintBottom_toBottomOf="@id/swRecordarme"
         app:layout_constraintEnd_toEndOf="parent"/>
 
-    <!-- Botón: Ingresar (Usando Material 3 y color semántico) -->
+    <!-- Botón: Ingresar (Sin cambios) -->
+    <!-- Se actualizará a Naranja automáticamente gracias al tema -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnIngresar"
         android:layout_width="0dp"
@@ -104,7 +102,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="48dp"/>
 
-    <!-- Texto: Registrarse -->
+    <!-- Texto: Registrarse (Sin cambios) -->
     <TextView
         android:id="@+id/tvRegistro"
         android:layout_width="wrap_content"
