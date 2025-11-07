@@ -10,11 +10,10 @@ import java.util.regex.Pattern;
 
 public class RegistroActivity extends AppCompatActivity {
 
-    private ActivityRegistroBinding binding; // Binding para este layout
+    private ActivityRegistroBinding binding;
 
-    // --- Expresiones Regulares para validación ---
-
-    // Al menos 8 caracteres, 1 número, 1 símbolo especial
+    // Expresión Regular para una contraseña segura
+    // (min 8 caract, 1 letra, 1 número, 1 símbolo especial)
     private static final Pattern PASSWORD_PATTERN =
             Pattern.compile("^" +
                     "(?=.*[0-9])" +         // al menos 1 número
@@ -30,7 +29,7 @@ public class RegistroActivity extends AppCompatActivity {
         binding = ActivityRegistroBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        // Listener para "Continuar"
+        // Listener para el botón Continuar
         binding.btnContinuar.setOnClickListener(v -> {
             if (validarRegistro()) {
                 // TODO: Aquí iría la lógica para guardar el usuario (con ViewModel y Repository)
@@ -41,7 +40,7 @@ public class RegistroActivity extends AppCompatActivity {
             }
         });
 
-        // Listener para "Cancelar"
+        // Listener para el botón Cancelar
         binding.btnCancelar.setOnClickListener(v -> {
             // Simplemente cierra esta pantalla y vuelve al Login
             finish();
@@ -55,7 +54,6 @@ public class RegistroActivity extends AppCompatActivity {
     private boolean validarRegistro() {
         // Limpiamos todos los errores previos
         binding.tilNombreCompleto.setError(null);
-        binding.tilUsuario.setError(null);
         binding.tilEmailRegistro.setError(null);
         binding.tilEmailConfirm.setError(null);
         binding.tilPasswordRegistro.setError(null);
@@ -63,7 +61,6 @@ public class RegistroActivity extends AppCompatActivity {
 
         // Obtenemos los textos
         String nombre = binding.etNombreCompleto.getText().toString().trim();
-        String usuario = binding.etUsuario.getText().toString().trim();
         String email = binding.etEmailRegistro.getText().toString().trim();
         String emailConfirm = binding.etEmailConfirm.getText().toString().trim();
         String password = binding.etPasswordRegistro.getText().toString(); // No usamos trim()
@@ -77,13 +74,7 @@ public class RegistroActivity extends AppCompatActivity {
             esValido = false;
         }
 
-        // 2. Validar Usuario
-        if (usuario.isEmpty()) {
-            binding.tilUsuario.setError("Usuario requerido");
-            esValido = false;
-        }
-
-        // 3. Validar Email
+        // 2. Validar Email
         if (email.isEmpty()) {
             binding.tilEmailRegistro.setError("Email requerido");
             esValido = false;
@@ -92,7 +83,7 @@ public class RegistroActivity extends AppCompatActivity {
             esValido = false;
         }
 
-        // 4. Validar Confirmación de Email
+        // 3. Validar Confirmación de Email
         if (emailConfirm.isEmpty()) {
             binding.tilEmailConfirm.setError("Confirmación de email requerida");
             esValido = false;
@@ -101,7 +92,7 @@ public class RegistroActivity extends AppCompatActivity {
             esValido = false;
         }
 
-        // 5. Validar Contraseña
+        // 4. Validar Contraseña
         if (password.isEmpty()) {
             binding.tilPasswordRegistro.setError("Contraseña requerida");
             esValido = false;
@@ -110,12 +101,13 @@ public class RegistroActivity extends AppCompatActivity {
             esValido = false;
         }
 
-        // 6. Validar Teléfono (opcional, pero si lo escribe, que sea válido)
+        // 5. Validar Teléfono
         if (telefono.isEmpty()) {
             binding.tilTelefono.setError("Teléfono requerido");
             esValido = false;
-        } else if (!Patterns.PHONE.matcher(telefono).matches() || telefono.length() < 9) {
-            binding.tilTelefono.setError("Formato de teléfono inválido");
+        } else if (telefono.length() < 9) {
+            // Usamos una validación simple de longitud
+            binding.tilTelefono.setError("Teléfono inválido (debe tener al menos 9 dígitos)");
             esValido = false;
         }
 

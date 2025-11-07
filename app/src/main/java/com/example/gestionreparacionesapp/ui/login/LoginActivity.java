@@ -1,11 +1,15 @@
 package com.example.gestionreparacionesapp.ui.login;
 
 import androidx.appcompat.app.AppCompatActivity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Patterns; // <-- 1. IMPORTAMOS LA HERRAMIENTA DE VALIDACIÓN DE EMAIL
+import android.text.Editable; // <-- IMPORTAR ESTO
+import android.text.TextWatcher; // <-- IMPORTAR ESTO
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Toast;
 import com.example.gestionreparacionesapp.databinding.ActivityLoginBinding;
+import com.example.gestionreparacionesapp.ui.registro.RegistroActivity;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -13,7 +17,6 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-// ... (El código de onCreate sigue igual) ...
         super.onCreate(savedInstanceState);
 
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
@@ -31,10 +34,59 @@ public class LoginActivity extends AppCompatActivity {
         binding.tvRegistro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: Aquí iría el código para abrir la pantalla de Registro
-                // Intent intent = new Intent(LoginActivity.this, RegistroActivity.class);
-                // startActivity(intent);
-                Toast.makeText(LoginActivity.this, "Ir a Registro...", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(LoginActivity.this, RegistroActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        // === ¡¡NUEVO MÉTODO PARA CORREGIR UX!! ===
+        setupTextWatchers();
+    }
+
+    /**
+     * Añade TextWatchers a los campos para limpiar los errores automáticamente
+     * en cuanto el usuario empieza a escribir.
+     */
+    private void setupTextWatchers() {
+        // TextWatcher para el Email
+        binding.etEmail.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                // No es necesario
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                // En cuanto el texto cambia, borramos el error
+                if (binding.tilEmail.getError() != null) {
+                    binding.tilEmail.setError(null);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                // No es necesario
+            }
+        });
+
+        // TextWatcher para la Contraseña
+        binding.etPassword.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                // No es necesario
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                // En cuanto el texto cambia, borramos el error
+                if (binding.tilPassword.getError() != null) {
+                    binding.tilPassword.setError(null);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                // No es necesario
             }
         });
     }
@@ -43,6 +95,7 @@ public class LoginActivity extends AppCompatActivity {
      * Valida las credenciales ingresadas por el usuario.
      */
     private void validarLogin() {
+        // Obtenemos el texto de los campos
         String email = binding.etEmail.getText().toString().trim();
         String password = binding.etPassword.getText().toString();
 
@@ -50,51 +103,44 @@ public class LoginActivity extends AppCompatActivity {
         binding.tilEmail.setError(null);
         binding.tilPassword.setError(null);
 
-        // --- VALIDACIONES MEJORADAS ---
-
-        // CASO 1: Campos vacíos
-        if (email.isEmpty() || password.isEmpty()) {
-            if (email.isEmpty()) {
-                binding.tilEmail.setError("Email requerido");
-            }
-            if (password.isEmpty()) {
-                binding.tilPassword.setError("Contraseña requerida");
-            }
-            Toast.makeText(this, "Por favor, completa todos los campos", Toast.LENGTH_SHORT).show();
-            return;
+        // 1. Validar campos vacíos
+        if (email.isEmpty()) {
+            binding.tilEmail.setError("Email requerido");
+            return; // Corta la ejecución
+        }
+        if (password.isEmpty()) {
+            binding.tilPassword.setError("Contraseña requerida");
+            return; // Corta la ejecución
         }
 
-        // CASO 2: Email no tiene formato válido
+        // 2. Validar formato de Email
         if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             binding.tilEmail.setError("Formato de email inválido");
-            Toast.makeText(this, "Por favor, ingresa un email válido", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        // CASO 3: Contraseña muy corta
+        // 3. Validar longitud de Contraseña
         if (password.length() < 6) {
             binding.tilPassword.setError("La contraseña debe tener al menos 6 caracteres");
-            Toast.makeText(this, "Contraseña demasiado corta", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        // --- LÓGICA DE AUTENTICACIÓN (CORREGIDA) ---
-        // (Esto es temporal. Luego lo hará el ViewModel contra el Repository)
-
-        // CASO 4: Login Exitoso
+        // 4. Lógica de Autenticación (Temporal "Hardcodeada")
+        // TODO: Reemplazar esto con la lógica del ViewModel (MVVM)
         if (email.equals("admin@admin.com") && password.equals("123456")) {
+            // LOGIN EXITOSO
+            Toast.makeText(this, "¡Login Exitoso! Bienvenido.", Toast.LENGTH_LONG).show();
 
-            Toast.makeText(this, "¡Login Exitoso! Bienvenido " + email, Toast.LENGTH_LONG).show();
-
-            // TODO: Aquí iría el código para navegar a la pantalla "Home"
+            // TODO: Navegar a la pantalla "HomeActivity"
             // Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
             // startActivity(intent);
-            // finish();
+            // finish(); // Cierra el Login
 
-            // CASO 5: Login Fallido (Credenciales incorrectas)
         } else {
-            binding.tilPassword.setError("Credenciales incorrectas");
-            Toast.makeText(this, "Email o contraseña incorrectos", Toast.LENGTH_LONG).show();
+            // LOGIN FALLIDO
+            Toast.makeText(this, "Error: Email o contraseña incorrectos", Toast.LENGTH_LONG).show();
+            binding.tilEmail.setError(" "); // Marca el error sin texto
+            binding.tilPassword.setError(" "); // Marca el error sin texto
         }
     }
 }

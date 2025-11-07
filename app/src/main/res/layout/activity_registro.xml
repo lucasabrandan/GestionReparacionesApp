@@ -41,32 +41,13 @@
             android:inputType="textPersonName|textCapWords"/>
     </com.google.android.material.textfield.TextInputLayout>
 
-    <!-- 2. Usuario -->
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tilUsuario"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="Ingrese un usuario"
-        app:helperText="Ejemplo: UsuarioEjemplo123"
-        app:layout_constraintTop_toBottomOf="@id/tilNombreCompleto"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etUsuario"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="text"/>
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <!-- 3. Correo Electrónico -->
+    <!-- 2. Correo Electrónico -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilEmailRegistro"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="Ingrese su correo electrónico"
-        app:layout_constraintTop_toBottomOf="@id/tilUsuario"
+        app:layout_constraintTop_toBottomOf="@id/tilNombreCompleto"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="16dp">
@@ -78,7 +59,7 @@
             android:inputType="textEmailAddress"/>
     </com.google.android.material.textfield.TextInputLayout>
 
-    <!-- 4. Confirmar Correo -->
+    <!-- 3. Confirmar Correo -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilEmailConfirm"
         android:layout_width="0dp"
@@ -96,13 +77,13 @@
             android:inputType="textEmailAddress"/>
     </com.google.android.material.textfield.TextInputLayout>
 
-    <!-- 5. Contraseña -->
+    <!-- 4. Contraseña -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilPasswordRegistro"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="Ingrese una contraseña"
-        app:helperText="Min. 8 caract. alfanuméricos y 1 signo"
+        app:helperText="Min. 8 caract. alfanuméricos y 1 símbolo"
         app:passwordToggleEnabled="true"
         app:layout_constraintTop_toBottomOf="@id/tilEmailConfirm"
         app:layout_constraintStart_toStartOf="parent"
@@ -116,7 +97,7 @@
             android:inputType="textPassword"/>
     </com.google.android.material.textfield.TextInputLayout>
 
-    <!-- 6. Teléfono -->
+    <!-- 5. Teléfono -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilTelefono"
         android:layout_width="0dp"
@@ -136,7 +117,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
 
-    <!-- Botones en un LinearLayout horizontal -->
+    <!-- Botones -->
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -146,7 +127,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginBottom="32dp">
 
-        <!-- Botón: Cancelar -->
+        <!-- Botón Cancelar (usa ?attr/colorError, que es tu rojo) -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnCancelar"
             style="@style/Widget.Material3.Button.OutlinedButton"
@@ -162,7 +143,7 @@
             app:cornerRadius="8dp"
             android:layout_marginEnd="8dp"/>
 
-        <!-- Botón: Continuar -->
+        <!-- Botón Continuar (usa ?attr/colorPrimary, que es tu amarillo) -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnContinuar"
             android:layout_width="0dp"
