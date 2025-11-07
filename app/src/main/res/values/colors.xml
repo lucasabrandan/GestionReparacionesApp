@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Colores base de tu proyecto -->
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!--     Colores del Figma     -->
+    <color name="app_blue">#0A59F7</color> <!-- Botones principales -->
+    <color name="app_red">#E53935</color> <!-- Botones Cancelar/Error -->
+    <color name="app_dark_header">#2C2C2C</color> <!-- Cabeceras (Clientes, Ventas) -->
+    <color name="app_green">#1DA953</color> <!-- Éxito -->
+    <color name="app_grey_text">#808080</color> <!-- Texto secundario (Recuperar Contraseña) -->
 </resources>

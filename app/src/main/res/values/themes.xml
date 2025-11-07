@@ -1,8 +1,36 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
+    <!--
+      TEMA BASE MODO LIGHT (DÍA)
+      Hereda de Material 3, DayNight, y Sin Barra de Acción (NoActionBar).
+    -->
     <style name="Base.Theme.GestionReparacionesApp" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+
+        <!-- === COLORES SEMÁNTICOS (MODO LIGHT) === -->
+        <!-- Aquí conectamos los colores de Figma con los roles de Material 3 -->
+
+        <!-- Color Primario (botones principales, switches, etc.) -->
+        <item name="colorPrimary">@color/app_blue</item>
+        <item name="colorOnPrimary">@color/white</item> <!-- Texto sobre el color primario -->
+
+        <!-- Color Secundario (lo usaremos para las cabeceras oscuras) -->
+        <item name="colorSecondary">@color/app_dark_header</item>
+        <item name="colorOnSecondary">@color/white</item>
+
+        <!-- Color de Error (para textos de error, botones de "Cancelar") -->
+        <item name="colorError">@color/app_red</item>
+        <item name="colorOnError">@color/white</item>
+
+        <!-- Color de Superficie (el "fondo" de las tarjetas, menús, etc.) -->
+        <item name="colorSurface">@color/white</item>
+        <item name="colorOnSurface">@color/black</item> <!-- Texto sobre el fondo -->
+
+        <!-- Color de Fondo de la App (el fondo general) -->
+        <item name="android:colorBackground">@color/white</item>
+        <item name="colorOnBackground">@color/black</item> <!-- Texto principal -->
+
+        <!-- Color de Éxito (no es un atributo estándar, pero lo usaremos) -->
+        <!-- Lo definiremos como un atributo custom luego si es necesario. -->
+
     </style>
 
     <style name="Theme.GestionReparacionesApp" parent="Base.Theme.GestionReparacionesApp" />

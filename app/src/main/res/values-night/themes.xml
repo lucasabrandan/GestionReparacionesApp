@@ -1,7 +1,35 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
+    <!-- TEMA BASE MODO DARK (NOCHE) Hereda de Material 3, DayNight, y Sin Barra de Acción (NoActionBar).
+    -->
     <style name="Base.Theme.GestionReparacionesApp" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+
+        <!-- === COLORES SEMÁNTICOS (MODO DARK) === -->
+        <!--
+          Estos son valores de RELLENO (placeholders) que respetan el contraste.
+          Cuando tengas tu Figma Dark, vienes aquí y cambias estos valores.
+        -->
+
+        <!-- Color Primario (un azul más claro y menos saturado) -->
+        <item name="colorPrimary">#FF6EA8FF</item>
+        <item name="colorOnPrimary">#FF002E6E</item> <!-- Texto oscuro sobre primario claro -->
+
+        <!-- Color Secundario (un gris claro) -->
+        <item name="colorSecondary">#FFC8C8C8</item>
+        <item name="colorOnSecondary">@color/black</item>
+
+        <!-- Color de Error (un rojo más claro) -->
+        <item name="colorError">#FFEA9999</item>
+        <item name="colorOnError">@color/black</item>
+
+        <!-- Color de Superficie (un gris oscuro para tarjetas) -->
+        <item name="colorSurface">#FF1C1C1C</item>
+        <item name="colorOnSurface">@color/white</item> <!-- Texto blanco -->
+
+        <!-- Color de Fondo de la App (casi negro) -->
+        <item name="android:colorBackground">#FF121212</item>
+        <item name="colorOnBackground">@color/white</item> <!-- Texto blanco -->
+
     </style>
+
+    <style name="Theme.GestionReparacionesApp" parent="Base.Theme.GestionReparacionesApp" />
 </resources>
