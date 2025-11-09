@@ -1,146 +1,93 @@
 package com.example.gestionreparacionesapp.ui.login;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable; // <-- IMPORTAR ESTO
-import android.text.TextWatcher; // <-- IMPORTAR ESTO
-import android.util.Patterns;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Toast;
 import com.example.gestionreparacionesapp.databinding.ActivityLoginBinding;
 import com.example.gestionreparacionesapp.ui.registro.RegistroActivity;
 
+/**
+ * La Vista (Activity) para el Login.
+ * Es "tonta": solo muestra la UI y le notifica al ViewModel
+ * sobre las acciones del usuario.
+ */
 public class LoginActivity extends AppCompatActivity {
 
     private ActivityLoginBinding binding;
+    private LoginViewModel loginViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        // Configura el listener para el botón "Ingresar"
-        binding.btnIngresar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                validarLogin();
-            }
+        // 1. Inicializa el ViewModel
+        loginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
+
+        // 2. Configura los listeners de la UI
+
+        // Listener del botón Ingresar
+        binding.btnIngresar.setOnClickListener(v -> {
+            String email = binding.etEmail.getText().toString().trim();
+            String password = binding.etPassword.getText().toString();
+            // La Activity solo notifica al ViewModel
+            loginViewModel.onLoginClicked(email, password);
         });
 
-        // Configura el listener para "Registrate"
-        binding.tvRegistro.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this, RegistroActivity.class);
-                startActivity(intent);
-            }
+        // Listener para el texto de Registro
+        binding.tvRegistro.setOnClickListener(v -> {
+            Intent intent = new Intent(LoginActivity.this, RegistroActivity.class);
+            startActivity(intent);
         });
 
-        // === ¡¡NUEVO MÉTODO PARA CORREGIR UX!! ===
+        // Configura los TextWatchers para limpiar errores (mejora de UX)
         setupTextWatchers();
+
+        // 3. Observa los cambios del ViewModel
+        loginViewModel.getLoginResult().observe(this, result -> {
+            if (result == null) return; // Ignora si es nulo
+
+            if (result.isError()) {
+                // Error: Muestra Toast y marca campos
+                Toast.makeText(this, result.getErrorMessage(), Toast.LENGTH_LONG).show();
+                binding.tilEmail.setError(" "); // Marca el campo (sin texto, solo color)
+                binding.tilPassword.setError(" ");
+            } else {
+                // Éxito: Muestra saludo y navega
+                Toast.makeText(this, "¡Bienvenido, " + result.getSuccessUserName() + "!", Toast.LENGTH_LONG).show();
+
+                // TODO: Navegar a HomeActivity
+                // Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                // startActivity(intent);
+                // finish(); // Cierra el Login para que no pueda volver con "atrás"
+            }
+        });
     }
 
     /**
-     * Añade TextWatchers a los campos para limpiar los errores automáticamente
+     * Añade listeners a los campos de texto para limpiar los errores de validación
      * en cuanto el usuario empieza a escribir.
      */
     private void setupTextWatchers() {
-        // TextWatcher para el Email
         binding.etEmail.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                // No es necesario
+            @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            @Override public void onTextChanged(CharSequence s, int start, int before, int count) {
+                binding.tilEmail.setError(null); // Limpia el error
             }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                // En cuanto el texto cambia, borramos el error
-                if (binding.tilEmail.getError() != null) {
-                    binding.tilEmail.setError(null);
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                // No es necesario
-            }
+            @Override public void afterTextChanged(Editable s) {}
         });
-
-        // TextWatcher para la Contraseña
         binding.etPassword.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                // No es necesario
+            @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            @Override public void onTextChanged(CharSequence s, int start, int before, int count) {
+                binding.tilPassword.setError(null); // Limpia el error
             }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                // En cuanto el texto cambia, borramos el error
-                if (binding.tilPassword.getError() != null) {
-                    binding.tilPassword.setError(null);
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                // No es necesario
-            }
+            @Override public void afterTextChanged(Editable s) {}
         });
-    }
-
-    /**
-     * Valida las credenciales ingresadas por el usuario.
-     */
-    private void validarLogin() {
-        // Obtenemos el texto de los campos
-        String email = binding.etEmail.getText().toString().trim();
-        String password = binding.etPassword.getText().toString();
-
-        // Limpiamos errores previos
-        binding.tilEmail.setError(null);
-        binding.tilPassword.setError(null);
-
-        // 1. Validar campos vacíos
-        if (email.isEmpty()) {
-            binding.tilEmail.setError("Email requerido");
-            return; // Corta la ejecución
-        }
-        if (password.isEmpty()) {
-            binding.tilPassword.setError("Contraseña requerida");
-            return; // Corta la ejecución
-        }
-
-        // 2. Validar formato de Email
-        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            binding.tilEmail.setError("Formato de email inválido");
-            return;
-        }
-
-        // 3. Validar longitud de Contraseña
-        if (password.length() < 6) {
-            binding.tilPassword.setError("La contraseña debe tener al menos 6 caracteres");
-            return;
-        }
-
-        // 4. Lógica de Autenticación (Temporal "Hardcodeada")
-        // TODO: Reemplazar esto con la lógica del ViewModel (MVVM)
-        if (email.equals("admin@admin.com") && password.equals("123456")) {
-            // LOGIN EXITOSO
-            Toast.makeText(this, "¡Login Exitoso! Bienvenido.", Toast.LENGTH_LONG).show();
-
-            // TODO: Navegar a la pantalla "HomeActivity"
-            // Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-            // startActivity(intent);
-            // finish(); // Cierra el Login
-
-        } else {
-            // LOGIN FALLIDO
-            Toast.makeText(this, "Error: Email o contraseña incorrectos", Toast.LENGTH_LONG).show();
-            binding.tilEmail.setError(" "); // Marca el error sin texto
-            binding.tilPassword.setError(" "); // Marca el error sin texto
-        }
     }
 }
