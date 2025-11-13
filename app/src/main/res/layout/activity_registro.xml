@@ -1,163 +1,161 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.appbar.AppBarLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="24dp"
-    android:background="?attr/android:colorBackground"
+    android:fitsSystemWindows="true"
     tools:context=".ui.registro.RegistroActivity">
 
-    <!-- Título: "Registro" -->
-    <TextView
-        android:id="@+id/tvRegistroTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Registro"
-        android:textSize="32sp"
-        android:textStyle="bold"
-        android:textColor="?attr/colorOnBackground"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="32dp"/>
+    <!-- AppBar evita superposición con notch/cámara -->
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/topAppBar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:theme="@style/ThemeOverlay.Material3.Dark.ActionBar"
+        app:navigationIcon="@drawable/ic_arrow_back_24"
+        app:title="Registro" />
 
-    <!-- 1. Nombre Completo -->
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tilNombreCompleto"
-        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="Ingrese su nombre completo"
-        app:layout_constraintTop_toBottomOf="@id/tvRegistroTitle"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="32dp">
+    <!-- Contenido desplazable que respeta el teclado -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:padding="16dp">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etNombreCompleto"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPersonName|textCapWords"/>
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <!-- 2. Correo Electrónico -->
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tilEmailRegistro"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="Ingrese su correo electrónico"
-        app:layout_constraintTop_toBottomOf="@id/tilNombreCompleto"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etEmailRegistro"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textEmailAddress"/>
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <!-- 3. Confirmar Correo -->
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tilEmailConfirm"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="Confirme su correo electrónico"
-        app:layout_constraintTop_toBottomOf="@id/tilEmailRegistro"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etEmailConfirm"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textEmailAddress"/>
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <!-- 4. Contraseña -->
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tilPasswordRegistro"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="Ingrese una contraseña"
-        app:helperText="Min. 8 caract. alfanuméricos y 1 símbolo"
-        app:passwordToggleEnabled="true"
-        app:layout_constraintTop_toBottomOf="@id/tilEmailConfirm"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etPasswordRegistro"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textPassword"/>
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <!-- 5. Teléfono -->
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tilTelefono"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="Ingrese su teléfono"
-        app:prefixText="+54"
-        app:layout_constraintTop_toBottomOf="@id/tilPasswordRegistro"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etTelefono"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="phone"/>
-    </com.google.android.material.textfield.TextInputLayout>
-
-
-    <!-- Botones -->
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="32dp">
-
-        <!-- Botón Cancelar (usa ?attr/colorError, que es tu rojo) -->
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnCancelar"
-            style="@style/Widget.Material3.Button.OutlinedButton"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Cancelar"
-            android:textColor="?attr/colorError"
-            app:strokeColor="?attr/colorError"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
             android:paddingTop="12dp"
-            android:paddingBottom="12dp"
-            android:textSize="16sp"
-            app:cornerRadius="8dp"
-            android:layout_marginEnd="8dp"/>
+            android:paddingBottom="24dp">
 
-        <!-- Botón Continuar (usa ?attr/colorPrimary, que es tu amarillo) -->
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnContinuar"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Continuar"
-            android:backgroundTint="?attr/colorPrimary"
-            android:textColor="?attr/colorOnPrimary"
-            android:paddingTop="12dp"
-            android:paddingBottom="12dp"
-            android:textSize="16sp"
-            app:cornerRadius="8dp"
-            android:layout_marginStart="8dp"/>
+            <!-- Nombre -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilNombre"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Nombre completo"
+                app:startIconDrawable="@drawable/ic_person_24">
 
-    </LinearLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etNombre"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:imeOptions="actionNext"
+                    android:inputType="textPersonName" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <!-- Email -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilEmail"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:hint="Correo electrónico"
+                app:startIconDrawable="@drawable/ic_mail_24">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:imeOptions="actionNext"
+                    android:inputType="textEmailAddress" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Confirmar Email -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilEmail2"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:hint="Confirmar correo"
+                app:startIconDrawable="@drawable/ic_mail_24">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etEmail2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:imeOptions="actionNext"
+                    android:inputType="textEmailAddress" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Contraseña -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilPassword"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:hint="Contraseña"
+                app:startIconDrawable="@drawable/ic_lock_24"
+                app:endIconMode="password_toggle">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:imeOptions="actionNext"
+                    android:inputType="textPassword" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Teléfono -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilTelefono"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:hint="Teléfono"
+                app:startIconDrawable="@drawable/ic_phone_24">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etTelefono"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:imeOptions="actionDone"
+                    android:inputType="phone" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Botón primario -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnRegistrarme"
+                style="@style/Widget.Material3.Button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="REGISTRARME"
+                app:cornerRadius="12dp"
+                app:iconGravity="textStart"
+                app:backgroundTint="@color/app_primary_yellow"
+                app:rippleColor="@android:color/transparent"
+                app:iconPadding="0dp"
+                android:textAllCaps="true"
+                android:textStyle="bold"
+                android:textColor="@color/app_dark_brand" />
+
+            <!-- Botón Secundario (Outline) con contraste alto en dark -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnCancelar"
+                style="@style/Widget.Material3.Button.OutlinedButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="CANCELAR"
+                android:textAllCaps="true"
+                android:textStyle="bold"
+                app:cornerRadius="12dp"
+                app:strokeWidth="1dp"
+                app:strokeColor="@color/app_primary_yellow"
+                android:textColor="@color/app_primary_yellow" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</com.google.android.material.appbar.AppBarLayout>

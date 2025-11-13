@@ -1,20 +1,24 @@
 package com.example.gestionreparacionesapp.ui.login;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowCompat;
+import androidx.core.view.WindowInsetsCompat;
+import androidx.lifecycle.ViewModelProvider;
+
 import com.example.gestionreparacionesapp.databinding.ActivityLoginBinding;
 import com.example.gestionreparacionesapp.ui.registro.RegistroActivity;
 
 /**
- * La Vista (Activity) para el Login.
- * Es "tonta": solo muestra la UI y le notifica al ViewModel
- * sobre las acciones del usuario.
+ * Pantalla principal de inicio de sesión.
+ * Incluye soporte para modo claro/oscuro, manejo del teclado y padding seguro.
  */
 public class LoginActivity extends AppCompatActivity {
 
@@ -24,70 +28,70 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Inflamos el layout con ViewBinding
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        // 1. Inicializa el ViewModel
+        // Configuración para respetar notch, barra de estado y navegación
+        WindowCompat.setDecorFitsSystemWindows(getWindow(), false);
+        ViewCompat.setOnApplyWindowInsetsListener(binding.getRoot(), (v, insets) -> {
+            Insets sysBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(sysBars.left, sysBars.top, sysBars.right, sysBars.bottom);
+            return insets;
+        });
+
+        // Inicializar ViewModel
         loginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
 
-        // 2. Configura los listeners de la UI
+        // === Configuración del switch Día/Noche ===
+        boolean isDarkMode = AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES;
+        binding.switchTheme.setChecked(isDarkMode);
 
-        // Listener del botón Ingresar
+        binding.switchTheme.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                Toast.makeText(this, "Modo oscuro activado 🌙", Toast.LENGTH_SHORT).show();
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                Toast.makeText(this, "Modo claro activado ☀️", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        // === Botón Ingresar ===
         binding.btnIngresar.setOnClickListener(v -> {
-            String email = binding.etEmail.getText().toString().trim();
-            String password = binding.etPassword.getText().toString();
-            // La Activity solo notifica al ViewModel
+            String email = binding.etEmail.getText() != null ? binding.etEmail.getText().toString().trim() : "";
+            String password = binding.etPassword.getText() != null ? binding.etPassword.getText().toString().trim() : "";
+
+            // Validación rápida antes de delegar al ViewModel
+            if (email.isEmpty() || password.isEmpty()) {
+                Toast.makeText(this, "Por favor complete todos los campos", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
             loginViewModel.onLoginClicked(email, password);
         });
 
-        // Listener para el texto de Registro
-        binding.tvRegistro.setOnClickListener(v -> {
-            Intent intent = new Intent(LoginActivity.this, RegistroActivity.class);
-            startActivity(intent);
-        });
+        // === Botón Crear cuenta ===
+        binding.btnCrearCuenta.setOnClickListener(v ->
+                startActivity(new Intent(this, com.example.gestionreparacionesapp.ui.registro.RegistroActivity.class))
+        );
 
-        // Configura los TextWatchers para limpiar errores (mejora de UX)
-        setupTextWatchers();
 
-        // 3. Observa los cambios del ViewModel
+        // === Observador del resultado de login ===
         loginViewModel.getLoginResult().observe(this, result -> {
-            if (result == null) return; // Ignora si es nulo
+            if (result == null) return;
 
             if (result.isError()) {
-                // Error: Muestra Toast y marca campos
                 Toast.makeText(this, result.getErrorMessage(), Toast.LENGTH_LONG).show();
-                binding.tilEmail.setError(" "); // Marca el campo (sin texto, solo color)
-                binding.tilPassword.setError(" ");
             } else {
-                // Éxito: Muestra saludo y navega
                 Toast.makeText(this, "¡Bienvenido, " + result.getSuccessUserName() + "!", Toast.LENGTH_LONG).show();
 
-                // TODO: Navegar a HomeActivity
-                // Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                // TODO: Aquí podrías lanzar tu HomeActivity cuando esté lista
+                // Intent intent = new Intent(this, HomeActivity.class);
                 // startActivity(intent);
-                // finish(); // Cierra el Login para que no pueda volver con "atrás"
+                // finish();
             }
-        });
-    }
-
-    /**
-     * Añade listeners a los campos de texto para limpiar los errores de validación
-     * en cuanto el usuario empieza a escribir.
-     */
-    private void setupTextWatchers() {
-        binding.etEmail.addTextChangedListener(new TextWatcher() {
-            @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-            @Override public void onTextChanged(CharSequence s, int start, int before, int count) {
-                binding.tilEmail.setError(null); // Limpia el error
-            }
-            @Override public void afterTextChanged(Editable s) {}
-        });
-        binding.etPassword.addTextChangedListener(new TextWatcher() {
-            @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-            @Override public void onTextChanged(CharSequence s, int start, int before, int count) {
-                binding.tilPassword.setError(null); // Limpia el error
-            }
-            @Override public void afterTextChanged(Editable s) {}
         });
     }
 }

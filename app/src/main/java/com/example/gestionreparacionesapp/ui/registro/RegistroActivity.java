@@ -1,126 +1,91 @@
 package com.example.gestionreparacionesapp.ui.registro;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
 import android.os.Bundle;
+import android.text.method.PasswordTransformationMethod;
+import android.view.View;
 import android.widget.Toast;
-import com.example.gestionreparacionesapp.databinding.ActivityRegistroBinding;
-import java.util.regex.Pattern;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.gestionreparacionesapp.databinding.ActivityRegistroBinding;
+
+/**
+ * Pantalla de registro de usuario.
+ * - Usa ViewBinding (activity_registro.xml)
+ * - Evita edge-to-edge para que el título no choque con la cámara.
+ * - Validaciones mínimas de ejemplo.
+ */
 public class RegistroActivity extends AppCompatActivity {
 
-    // Expresión regular para una contraseña segura
-    private static final Pattern PASSWORD_PATTERN =
-            Pattern.compile("^" +
-                    "(?=.*[0-9])" +         // al menos 1 dígito
-                    "(?=.*[a-z])" +         // al menos 1 minúscula
-                    "(?=.*[A-Z])" +         // al menos 1 mayúscula
-                    "(?=.*[@#$%^&+=!])" +   // al menos 1 símbolo
-                    "(?=\\S+$)" +           // sin espacios en blanco
-                    ".{8,}" +               // al menos 8 caracteres
-                    "$");
-
     private ActivityRegistroBinding binding;
-    private RegistroViewModel registroViewModel;
+    private boolean pwdVisible = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // SIN EdgeToEdge.enable(...) para que respetemos el status bar y notch.
         binding = ActivityRegistroBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        // 1. Inicializa el ViewModel
-        registroViewModel = new ViewModelProvider(this).get(RegistroViewModel.class);
+        // --- AppBar simple con back ---
+        setSupportActionBar(binding.topAppBar);
+        binding.topAppBar.setNavigationOnClickListener(v -> onBackPressed());
 
-        // 2. Configura Listeners de la UI
-        binding.btnContinuar.setOnClickListener(v -> {
-            if (validarCamposLocalmente()) {
-                // Si las validaciones de UI (locales) pasan, le mandamos los datos al ViewModel
-                String nombre = binding.etNombreCompleto.getText().toString().trim();
-                String email = binding.etEmailRegistro.getText().toString().trim();
-                String password = binding.etPasswordRegistro.getText().toString();
-                String telefono = binding.etTelefono.getText().toString().trim();
+        // --- Alternar visibilidad de contraseña ---
+        binding.tilPassword.setEndIconOnClickListener(v -> togglePassword());
 
-                registroViewModel.onRegistroClicked(nombre, email, password, telefono);
-            }
-        });
+        // --- Botón Registrar ---
+        binding.btnRegistrarme.setOnClickListener(v -> onRegisterClicked());
 
-        binding.btnCancelar.setOnClickListener(v -> {
-            finish(); // Cierra esta activity y vuelve al Login
-        });
-
-        // 3. Observa los cambios del ViewModel
-        registroViewModel.getRegistroResult().observe(this, result -> {
-            if (result == null) return;
-
-            if (result.isError()) {
-                // Error (ej. "Email ya existe")
-                Toast.makeText(this, result.getErrorMessage(), Toast.LENGTH_LONG).show();
-            } else {
-                // Éxito
-                Toast.makeText(this, "¡Registro Exitoso! Ahora puedes iniciar sesión.", Toast.LENGTH_LONG).show();
-                finish(); // Cierra esta activity y vuelve al Login
-            }
-        });
+        // --- Botón Cancelar ---
+        binding.btnCancelar.setOnClickListener(v -> onBackPressed());
     }
 
-    /**
-     * Valida la UI localmente antes de enviar los datos al ViewModel.
-     * Muestra errores en los campos.
-     */
-    private boolean validarCamposLocalmente() {
-        // Limpiamos errores anteriores
-        binding.tilNombreCompleto.setError(null);
-        binding.tilEmailRegistro.setError(null);
-        binding.tilEmailConfirm.setError(null);
-        binding.tilPasswordRegistro.setError(null);
-        binding.tilTelefono.setError(null);
-
-        String nombre = binding.etNombreCompleto.getText().toString().trim();
-        String email = binding.etEmailRegistro.getText().toString().trim();
-        String emailConfirm = binding.etEmailConfirm.getText().toString().trim();
-        String password = binding.etPasswordRegistro.getText().toString();
-        String telefono = binding.etTelefono.getText().toString().trim();
-
-        boolean esValido = true;
-
-        if (nombre.isEmpty()) {
-            binding.tilNombreCompleto.setError("Nombre requerido");
-            esValido = false;
+    private void togglePassword() {
+        pwdVisible = !pwdVisible;
+        if (pwdVisible) {
+            binding.etPassword.setTransformationMethod(null);
+        } else {
+            binding.etPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
         }
+        binding.etPassword.setSelection(binding.etPassword.getText().length());
+    }
+
+    private void onRegisterClicked() {
+        String nombre = binding.etNombre.getText().toString().trim();
+        String email = binding.etEmail.getText().toString().trim();
+        String email2 = binding.etEmail2.getText().toString().trim();
+        String pwd = binding.etPassword.getText().toString();
+        String tel = binding.etTelefono.getText().toString().trim();
+
+        // Validaciones rápidas (puedes reemplazar por tus reglas)
+        if (nombre.isEmpty()) {
+            binding.tilNombre.setError("Ingrese su nombre completo");
+            return;
+        } else binding.tilNombre.setError(null);
 
         if (email.isEmpty()) {
-            binding.tilEmailRegistro.setError("Email requerido");
-            esValido = false;
-        } else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            binding.tilEmailRegistro.setError("Email inválido");
-            esValido = false;
-        }
+            binding.tilEmail.setError("Ingrese su correo");
+            return;
+        } else binding.tilEmail.setError(null);
 
-        if (emailConfirm.isEmpty()) {
-            binding.tilEmailConfirm.setError("Confirme su email");
-            esValido = false;
-        } else if (!email.equals(emailConfirm)) {
-            binding.tilEmailConfirm.setError("Los emails no coinciden");
-            esValido = false;
-        }
+        if (!email.equals(email2)) {
+            binding.tilEmail2.setError("El correo no coincide");
+            return;
+        } else binding.tilEmail2.setError(null);
 
-        if (password.isEmpty()) {
-            binding.tilPasswordRegistro.setError("Contraseña requerida");
-            esValido = false;
-        } else if (!PASSWORD_PATTERN.matcher(password).matches()) {
-            binding.tilPasswordRegistro.setError("La contraseña no cumple los requisitos de seguridad");
-            esValido = false;
-        }
+        if (pwd.length() < 8) {
+            binding.tilPassword.setError("Mínimo 8 caracteres");
+            return;
+        } else binding.tilPassword.setError(null);
 
-        if (telefono.isEmpty()) {
-            binding.tilTelefono.setError("Teléfono requerido");
-            esValido = false;
-        } else if (telefono.length() < 9) { // Ej: 1122334455 (10 dígitos)
-            binding.tilTelefono.setError("Teléfono inválido");
-            esValido = false;
-        }
+        if (tel.isEmpty()) {
+            binding.tilTelefono.setError("Ingrese su teléfono");
+            return;
+        } else binding.tilTelefono.setError(null);
 
-        return esValido;
+        // Aquí iría la llamada a tu ViewModel/Repository para registrar.
+        Toast.makeText(this, "¡Registro OK (demo)!", Toast.LENGTH_SHORT).show();
+        finish(); // volver al login
     }
 }
