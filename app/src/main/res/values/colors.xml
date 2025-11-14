@@ -1,17 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Colores base -->
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <!-- Colores principales del Figma -->
+    <color name="blue_primary">#0D6EFD</color>
+    <color name="blue_dark">#0B5ED7</color>
+    <color name="blue_button">#2962FF</color>
 
-    <!--
-      NUEVA PALETA DE COLORES - Basada en HEX exactos del Logo
-    -->
-    <color name="app_primary_yellow">#f6b81a</color> <!-- Amarillo/Naranja principal -->
-    <color name="app_error_red">#e74c3c</color> <!-- Rojo del logo -->
-    <color name="app_dark_brand">#231f20</color> <!-- Negro/Gris oscuro del logo -->
+    <color name="red_cancel">#DC3545</color>
+    <color name="red_dark">#BB2D3B</color>
+    <color name="red_button">#F44336</color>
 
-    <!-- Colores de UI (existentes) -->
-    <color name="app_grey_text">#808080</color> <!-- Texto secundario (Recuperar Contraseña) -->
-    <color name="app_green">#1DA953</color> <!-- Éxito (Venta 001) -->
+    <color name="green_success">#28A745</color>
+    <color name="green_dark">#218838</color>
+    <color name="green_button">#4CAF50</color>
+
+    <color name="dark_grey">#2C3E50</color>
+    <color name="dark_grey_darker">#1A252F</color>
+    <color name="gray_dark">#424242</color>
+    <color name="gray_text">#757575</color>
+    <color name="gray_light">#EEEEEE</color>
+
+    <!-- Colores de fondo y texto -->
+    <color name="white">#FFFFFF</color>
+    <color name="light_grey">#F8F9FA</color>
+    <color name="grey_text">#6C757D</color>
+    <color name="black">#000000</color>
+    <color name="background">#FAFAFA</color>
+
+    <!-- Colores para el tema -->
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="primary">#2F4F4F</color>
+    <color name="primary_dark">#1C3030</color>
+    <color name="accent">#FF9800</color>
+
+    <!-- Colores faltantes -->
+    <color name="app_primary_yellow">#FFC107</color>
+    <color name="app_dark_brand">#1A252F</color>
+    <color name="app_error_red">#DC3545</color>
 </resources>

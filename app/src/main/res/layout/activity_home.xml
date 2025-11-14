@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:background="@color/background"
+    android:gravity="center">
+
+    <TextView
+        android:id="@+id/tvBienvenida"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="¡Bienvenido Esteban!"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:gravity="center"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="40dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/accesos_rapidos"
+        android:textSize="16sp"
+        android:textColor="@color/gray_text"
+        android:gravity="start"
+        android:layout_marginBottom="16dp" />
+
+    <Button
+        android:id="@+id/btnVentas"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:text="@string/ventas"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:backgroundTint="@color/blue_button"
+        android:layout_marginBottom="12dp" />
+
+    <Button
+        android:id="@+id/btnReparaciones"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:text="@string/reparaciones"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:backgroundTint="@color/blue_button"
+        android:layout_marginBottom="12dp" />
+
+    <Button
+        android:id="@+id/btnClientes"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:text="@string/clientes"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:backgroundTint="@color/blue_button"
+        android:layout_marginBottom="12dp" />
+
+    <Button
+        android:id="@+id/btnProductos"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:text="@string/productos"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:backgroundTint="@color/blue_button"
+        android:layout_marginBottom="40dp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <Button
+        android:id="@+id/btnCerrarSesion"
+        android:layout_width="wrap_content"
+        android:layout_height="56dp"
+        android:text="@string/cerrar_sesion"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/red_button"
+        android:paddingStart="32dp"
+        android:paddingEnd="32dp" />
+
+</LinearLayout>
