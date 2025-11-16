@@ -11,7 +11,8 @@ public class PasswordUtils {
             byte[] hashBytes = digest.digest(plainPassword.getBytes());
             return bytesToHex(hashBytes);
         } catch (NoSuchAlgorithmException e) {
-            // lo ideal es loguear el error.
+            // En un TP: si falla, volvemos la contraseña original
+            // (lo ideal sería loguear el error)
             return plainPassword;
         }
     }

@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.gestionreparacionesapp.R;
 import com.example.gestionreparacionesapp.data.db.AppDatabase;
 import com.example.gestionreparacionesapp.data.db.entity.Usuario;
+import com.example.gestionreparacionesapp.util.PasswordUtils;
 
 import java.util.regex.Pattern;
 
@@ -55,7 +56,7 @@ public class RegistroActivity extends AppCompatActivity {
         String contrasena = etContrasena.getText().toString().trim();
         String telefono = etTelefono.getText().toString().trim();
 
-        // Validaciones
+        // Validaciones básicas
         if (nombre.isEmpty() || usuario.isEmpty() || correo.isEmpty() ||
                 confirmarCorreo.isEmpty() || contrasena.isEmpty() || telefono.isEmpty()) {
             Toast.makeText(this, "Por favor complete todos los campos", Toast.LENGTH_SHORT).show();
@@ -72,13 +73,13 @@ public class RegistroActivity extends AppCompatActivity {
             return;
         }
 
-        // Validar contraseña: mínimo 8 caracteres, alfanuméricos y 1 signo
+        // Validar contraseña: mínimo 8 caracteres, letras, números y símbolos
         if (!validarContrasena(contrasena)) {
             Toast.makeText(this, "La contraseña debe tener mínimo 8 caracteres, letras, números y 1 signo", Toast.LENGTH_LONG).show();
             return;
         }
 
-        // Verificar si el email ya existe
+        // Verificar si ya existe el email
         if (db.usuarioDao().getByEmail(correo) != null) {
             Toast.makeText(this, "Este correo ya está registrado", Toast.LENGTH_SHORT).show();
             return;
@@ -90,8 +91,20 @@ public class RegistroActivity extends AppCompatActivity {
             return;
         }
 
-        // Guardar usuario
-        Usuario nuevoUsuario = new Usuario(nombre, usuario, correo, contrasena, telefono);
+        // ============================
+        //       HASH PASSWORD
+        // ============================
+        String passwordHasheada = PasswordUtils.hashPassword(contrasena);
+
+        // Guardar usuario en BBDD con contraseña hasheada
+        Usuario nuevoUsuario = new Usuario(
+                nombre,
+                usuario,
+                correo,
+                passwordHasheada,
+                telefono
+        );
+
         long id = db.usuarioDao().insert(nuevoUsuario);
 
         if (id > 0) {
@@ -103,7 +116,6 @@ public class RegistroActivity extends AppCompatActivity {
     }
 
     private boolean validarContrasena(String contrasena) {
-        // Mínimo 8 caracteres, al menos una letra, un número y un símbolo
         Pattern pattern = Pattern.compile("^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,}$");
         return pattern.matcher(contrasena).matches();
     }
