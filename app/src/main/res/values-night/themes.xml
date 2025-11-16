@@ -1,27 +1,21 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- TEMA BASE MODO DARK (NOCHE) -->
+
     <style name="Base.Theme.GestionReparacionesApp" parent="Theme.Material3.DayNight.NoActionBar">
 
-        <!-- === TEMA DARK - (Basado en Logo) === -->
-        <!-- Paleta generada profesionalmente para M3 a partir de tus HEX -->
+        <item name="colorPrimary">@color/blue_button</item>
+        <item name="colorOnPrimary">@color/white</item>
 
-        <!-- Primario (Amarillo más claro y suave) -->
-        <item name="colorPrimary">#FAD76E</item>
-        <item name="colorOnPrimary">#4F3900</item> <!-- Texto oscuro (derivado de amarillo) -->
+        <item name="colorSecondary">@color/app_primary_yellow</item>
+        <item name="colorOnSecondary">@color/app_dark_brand</item>
 
-        <!-- Secundario (Gris claro, derivado del negro de tu marca) -->
-        <item name="colorSecondary">#E0E0E0</item>
-        <item name="colorOnSecondary">@color/black</item>
+        <item name="colorError">@color/app_error_red</item>
+        <item name="colorOnError">@color/white</item>
 
-        <!-- Error (Rojo más claro y suave) -->
-        <item name="colorError">#F1A097</item>
-        <item name="colorOnError">#3E0000</item> <!-- Texto oscuro (derivado de rojo) -->
+        <item name="colorSurface">@color/surface</item>
+        <item name="colorOnSurface">@color/on_surface</item>
+        <item name="android:colorBackground">@color/background</item>
+        <item name="colorOnBackground">@color/on_background</item>
 
-        <!-- Fondos (Estándar Dark) -->
-        <item name="colorSurface">#FF1C1C1C</item>
-        <item name="colorOnSurface">@color/white</item>
-        <item name="android:colorBackground">#FF121212</item>
-        <item name="colorOnBackground">@color/white</item>
 
     </style>
 

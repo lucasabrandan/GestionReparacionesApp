@@ -1,27 +1,21 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- TEMA BASE MODO LIGHT (DÍA) -->
+
     <style name="Base.Theme.GestionReparacionesApp" parent="Theme.Material3.DayNight.NoActionBar">
 
-        <!-- === TEMA LIGHT - (Basado en Logo) === -->
+        <item name="colorPrimary">@color/blue_button</item>
+        <item name="colorOnPrimary">@color/white</item>
 
-        <!-- Color Primario (Amarillo/Naranja) -->
-        <item name="colorPrimary">@color/app_primary_yellow</item>
-        <!-- Texto sobre primario: usamos el negro del logo para MÁXIMO contraste -->
-        <item name="colorOnPrimary">@color/app_dark_brand</item>
+        <item name="colorSecondary">@color/app_primary_yellow</item>
+        <item name="colorOnSecondary">@color/app_dark_brand</item>
 
-        <!-- Color Secundario (Negro/Gris del logo) -->
-        <item name="colorSecondary">@color/app_dark_brand</item>
-        <item name="colorOnSecondary">@color/white</item>
-
-        <!-- Color de Error (Rojo del logo) -->
         <item name="colorError">@color/app_error_red</item>
         <item name="colorOnError">@color/white</item>
 
-        <!-- Fondos (Estándar Light) -->
-        <item name="colorSurface">@color/white</item>
-        <item name="colorOnSurface">@color/black</item>
-        <item name="android:colorBackground">@color/white</item>
-        <item name="colorOnBackground">@color/black</item> <!-- Texto principal -->
+        <item name="colorSurface">@color/surface</item>
+        <item name="colorOnSurface">@color/on_surface</item>
+        <item name="android:colorBackground">@color/background</item>
+        <item name="colorOnBackground">@color/on_background</item>
+
 
     </style>
 

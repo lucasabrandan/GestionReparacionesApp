@@ -11,54 +11,61 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="24dp"
-        android:gravity="center">
+        android:gravity="center_horizontal">
 
         <!-- Logo -->
         <ImageView
             android:id="@+id/ivLogo"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
+            android:layout_width="160dp"
+            android:layout_height="160dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="16dp"
             android:src="@drawable/app_logo"
             android:contentDescription="@string/app_name" />
 
         <!-- Email -->
-        <TextView
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilEmail"
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/email"
-            android:textSize="14sp"
-            android:textColor="@color/black"
-            android:layout_marginTop="16dp" />
+            android:hint="@string/email"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="12dp"
+            app:boxStrokeColor="@color/blue_button"
+            app:hintTextColor="@color/gray_text">
 
-        <EditText
-            android:id="@+id/etEmail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="ejemplo@email.com"
-            android:inputType="textEmailAddress"
-            android:padding="12dp"
-            android:background="@android:color/transparent"
-            android:drawableBottom="@drawable/line_divider"
-            android:layout_marginBottom="16dp" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"
+                android:textColor="@color/on_background"
+                android:textColorHint="@color/gray_text" />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
         <!-- Password -->
-        <TextView
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilPassword"
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/password"
-            android:textSize="14sp"
-            android:textColor="@color/black" />
+            android:hint="@string/password"
+            android:layout_marginBottom="8dp"
+            app:endIconMode="password_toggle"
+            app:boxStrokeColor="@color/blue_button"
+            app:hintTextColor="@color/gray_text">
 
-        <EditText
-            android:id="@+id/etPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="********"
-            android:inputType="textPassword"
-            android:padding="12dp"
-            android:background="@android:color/transparent"
-            android:drawableBottom="@drawable/line_divider"
-            android:layout_marginBottom="16dp" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:textColor="@color/on_background"
+                android:textColorHint="@color/gray_text" />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
         <!-- Recuperar contraseña -->
         <TextView
@@ -67,9 +74,9 @@
             android:layout_height="wrap_content"
             android:text="@string/recuperar"
             android:textSize="14sp"
-            android:textColor="@color/gray_text"
+            android:textColor="@color/blue_link"
             android:gravity="end"
-            android:layout_marginBottom="24dp" />
+            android:layout_marginBottom="16dp" />
 
         <!-- Recordarme -->
         <LinearLayout
@@ -85,25 +92,27 @@
                 android:layout_weight="1"
                 android:text="@string/recordarme"
                 android:textSize="16sp"
-                android:textColor="@color/black" />
+                android:textColor="@color/on_background" />
 
-            <androidx.appcompat.widget.SwitchCompat
+            <com.google.android.material.switchmaterial.SwitchMaterial
                 android:id="@+id/switchRecordarme"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </LinearLayout>
 
         <!-- Botón Ingresar -->
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btnIngresar"
+            style="@style/Widget.Material3.Button"
             android:layout_width="match_parent"
-            android:layout_height="56dp"
+            android:layout_height="48dp"
             android:text="@string/ingresar"
-            android:textColor="@color/white"
-            android:textSize="16sp"
+            android:textAllCaps="false"
             android:textStyle="bold"
-            android:backgroundTint="@color/blue_button"
-            android:layout_marginBottom="16dp" />
+            android:layout_marginBottom="16dp"
+            app:cornerRadius="24dp"
+            app:backgroundTint="@color/blue_button"
+            android:textColor="@color/white" />
 
         <!-- Registro -->
         <LinearLayout
@@ -125,7 +134,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/registrate"
                 android:textSize="14sp"
-                android:textColor="@color/black"
+                android:textColor="@color/blue_link"
                 android:textStyle="bold"
                 android:layout_marginStart="4dp" />
         </LinearLayout>
