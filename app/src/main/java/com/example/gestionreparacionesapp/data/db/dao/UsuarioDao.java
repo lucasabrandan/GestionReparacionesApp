@@ -35,4 +35,10 @@ public interface UsuarioDao {
 
     @Query("SELECT * FROM usuarios")
     List<Usuario> getAll();
+
+    @Query("SELECT * FROM usuarios WHERE email = :email LIMIT 1")
+    Usuario findByEmail(String email);
+
+
+
 }
