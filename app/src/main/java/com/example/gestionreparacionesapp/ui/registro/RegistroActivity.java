@@ -1,4 +1,4 @@
-package com.example.gestionreparacionesapp;
+package com.example.gestionreparacionesapp.ui.registro;
 
 import android.os.Bundle;
 import android.util.Patterns;
@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.gestionreparacionesapp.R;
 import com.example.gestionreparacionesapp.data.db.AppDatabase;
 import com.example.gestionreparacionesapp.data.db.entity.Usuario;
 

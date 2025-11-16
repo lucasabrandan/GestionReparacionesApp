@@ -15,7 +15,7 @@
 
         <!-- Login Activity (MAIN) -->
         <activity
-            android:name=".LoginActivity"
+            android:name=".ui.login.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,52 +25,52 @@
 
         <!-- Registro Activity -->
         <activity
-            android:name=".RegistroActivity"
+            android:name=".ui.registro.RegistroActivity"
             android:exported="false" />
 
         <!-- Home Activity -->
         <activity
-            android:name=".HomeActivity"
+            android:name=".ui.home.HomeActivity"
             android:exported="false" />
 
         <!-- Clientes Activity -->
         <activity
-            android:name=".ClientesActivity"
+            android:name=".ui.clientes.ClientesActivity"
             android:exported="false" />
 
         <!-- Productos Activity -->
         <activity
-            android:name=".ProductosActivity"
+            android:name=".ui.productos.ProductosActivity"
             android:exported="false" />
 
         <!-- Nueva Venta Activity -->
         <activity
-            android:name=".NuevaVentaActivity"
+            android:name=".ui.ventas.NuevaVentaActivity"
             android:exported="false" />
 
         <!-- Nueva Reparacion Activity -->
         <activity
-            android:name=".NuevaReparacionActivity"
+            android:name=".ui.reparaciones.NuevaReparacionActivity"
             android:exported="false" />
 
         <!-- Lista Clientes Activity -->
         <activity
-            android:name=".ListaClientesActivity"
+            android:name=".ui.clientes.ListaClientesActivity"
             android:exported="false" />
 
         <!-- Lista Productos Activity -->
         <activity
-            android:name=".ListaProductosActivity"
+            android:name=".ui.productos.ListaProductosActivity"
             android:exported="false" />
 
         <!-- Lista Ventas Activity -->
         <activity
-            android:name=".ListaVentasActivity"
+            android:name=".ui.ventas.ListaVentasActivity"
             android:exported="false" />
 
         <!-- Lista Reparaciones Activity -->
         <activity
-            android:name=".ListaReparacionesActivity"
+            android:name=".ui.reparaciones.ListaReparacionesActivity"
             android:exported="false" />
 
     </application>

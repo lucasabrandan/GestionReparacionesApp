@@ -1,4 +1,4 @@
-package com.example.gestionreparacionesapp;
+package com.example.gestionreparacionesapp.ui.productos;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,8 +8,12 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.gestionreparacionesapp.ui.reparaciones.NuevaReparacionActivity;
+import com.example.gestionreparacionesapp.ui.ventas.NuevaVentaActivity;
+import com.example.gestionreparacionesapp.R;
 import com.example.gestionreparacionesapp.data.db.AppDatabase;
 import com.example.gestionreparacionesapp.data.db.entity.Producto;
+import com.example.gestionreparacionesapp.ui.clientes.ClientesActivity;
 
 public class ProductosActivity extends AppCompatActivity {
 

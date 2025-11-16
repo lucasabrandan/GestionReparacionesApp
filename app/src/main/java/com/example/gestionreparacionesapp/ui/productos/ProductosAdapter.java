@@ -1,4 +1,4 @@
-package com.example.gestionreparacionesapp;
+package com.example.gestionreparacionesapp.ui.productos;
 
 import android.graphics.Color;
 import android.view.LayoutInflater;
@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.gestionreparacionesapp.R;
 import com.example.gestionreparacionesapp.data.db.entity.Producto;
 
 import java.util.List;

@@ -1,12 +1,12 @@
-package com.example.gestionreparacionesapp;
+package com.example.gestionreparacionesapp.ui.ventas;
 
 import com.example.gestionreparacionesapp.data.db.entity.Producto;
 
-public class ProductoReparacion {
+public class ProductoVenta {
     private Producto producto;
     private int cantidad;
 
-    public ProductoReparacion(Producto producto, int cantidad) {
+    public ProductoVenta(Producto producto, int cantidad) {
         this.producto = producto;
         this.cantidad = cantidad;
     }

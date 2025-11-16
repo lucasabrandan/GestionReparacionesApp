@@ -1,4 +1,4 @@
-package com.example.gestionreparacionesapp;
+package com.example.gestionreparacionesapp.ui.clientes;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,8 +9,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.gestionreparacionesapp.ui.reparaciones.NuevaReparacionActivity;
+import com.example.gestionreparacionesapp.ui.ventas.NuevaVentaActivity;
+import com.example.gestionreparacionesapp.R;
 import com.example.gestionreparacionesapp.data.db.AppDatabase;
 import com.example.gestionreparacionesapp.data.db.entity.Cliente;
+import com.example.gestionreparacionesapp.ui.productos.ProductosActivity;
 
 import java.util.List;
 

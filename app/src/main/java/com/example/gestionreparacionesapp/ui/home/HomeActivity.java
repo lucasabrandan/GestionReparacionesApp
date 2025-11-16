@@ -1,4 +1,4 @@
-package com.example.gestionreparacionesapp;
+package com.example.gestionreparacionesapp.ui.home;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,7 +7,13 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.gestionreparacionesapp.ui.clientes.ClientesActivity;
+import com.example.gestionreparacionesapp.ui.reparaciones.NuevaReparacionActivity;
+import com.example.gestionreparacionesapp.ui.ventas.NuevaVentaActivity;
+import com.example.gestionreparacionesapp.ui.productos.ProductosActivity;
+import com.example.gestionreparacionesapp.R;
 import com.example.gestionreparacionesapp.data.db.AppDatabase;
+import com.example.gestionreparacionesapp.ui.login.LoginActivity;
 
 public class HomeActivity extends AppCompatActivity {
 
