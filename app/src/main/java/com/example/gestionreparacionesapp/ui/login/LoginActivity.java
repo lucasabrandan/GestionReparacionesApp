@@ -14,6 +14,7 @@ import com.example.gestionreparacionesapp.data.db.AppDatabase;
 import com.example.gestionreparacionesapp.data.db.entity.Usuario;
 import com.example.gestionreparacionesapp.ui.home.HomeActivity;
 import com.example.gestionreparacionesapp.ui.registro.RegistroActivity;
+import com.example.gestionreparacionesapp.util.PasswordUtils;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.google.android.material.textfield.TextInputEditText;
@@ -73,13 +74,14 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        tvRecuperar.setOnClickListener(v ->
-                Toast.makeText(this, "Funcionalidad de recuperación en desarrollo", Toast.LENGTH_SHORT).show()
-        );
+        tvRecuperar.setOnClickListener(v -> {
+            // TODO: implementar flujo de recuperación más adelante
+            Toast.makeText(this, "Funcionalidad de recuperación en desarrollo", Toast.LENGTH_SHORT).show();
+        });
     }
 
     private void login() {
-        // Limpiamos errores previos
+        // Limpiamos errores anteriores
         tilEmail.setError(null);
         tilPassword.setError(null);
 
@@ -106,7 +108,6 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         // === CONSULTA A LA BASE ===
-        // TODO: cuando apliquemos hash, comparar hash contra hash
         Usuario usuario = db.usuarioDao().findByEmail(email);
 
         if (usuario == null) {
@@ -115,8 +116,11 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
 
+        // Hasheamos la contraseña ingresada
+        String hashedInput = PasswordUtils.hashPassword(password);
+
         // Contraseña incorrecta
-        if (!usuario.getPassword().equals(password)) {
+        if (!hashedInput.equals(usuario.getPassword())) {
             tilPassword.setError("Contraseña incorrecta");
             tilPassword.requestFocus();
             return;
