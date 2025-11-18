@@ -56,17 +56,15 @@ public class ProductosActivity extends AppCompatActivity {
         String precioStr = etPrecio.getText().toString().trim();
         String cantidadStr = etCantidad.getText().toString().trim();
 
-        // Validar campos obligatorios
+        // Validaciones...
         if (nombre.isEmpty()) {
             Toast.makeText(this, "El nombre es obligatorio", Toast.LENGTH_SHORT).show();
             return;
         }
-
         if (precioStr.isEmpty()) {
             Toast.makeText(this, "El precio es obligatorio", Toast.LENGTH_SHORT).show();
             return;
         }
-
         if (cantidadStr.isEmpty()) {
             Toast.makeText(this, "La cantidad es obligatoria", Toast.LENGTH_SHORT).show();
             return;
@@ -79,14 +77,27 @@ public class ProductosActivity extends AppCompatActivity {
             Toast.makeText(this, "El precio debe ser mayor a 0", Toast.LENGTH_SHORT).show();
             return;
         }
-
         if (cantidad < 0) {
             Toast.makeText(this, "La cantidad no puede ser negativa", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        // Crear y guardar producto
-        Producto producto = new Producto(nombre, precio, cantidad);
+        // ✨ Generar SKU simple
+        String sku = "SKU-" + System.currentTimeMillis();
+
+        // TODO: obtener userId real desde login
+        int userId = 1; // TEMPORAL
+
+        // ✨ Crear producto usando el constructor completo
+        Producto producto = new Producto(
+                userId,
+                sku,
+                nombre,
+                precio,
+                cantidad,
+                null   // imageUri
+        );
+
         long id = db.productoDao().insert(producto);
 
         if (id > 0) {
